@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-neo4j-ingress
+  namespace: neo4j
+  labels:
+    app-owner: ck
+    app.kubernetes.io/name: my-neo4j-release
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - ck02-sukckn.net.sas.com
+    secretName: net-sas-com-app-certs
+  rules:
+  - host: ck02-sukckn.net.sas.com
+    http:
+      paths:
+      - path: /browser
+        pathType: Prefix 
+        backend:
+          service:
+            name: my-neo4j-release
+            port:
+              number: 7474

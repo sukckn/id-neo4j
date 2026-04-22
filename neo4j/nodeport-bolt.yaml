@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcp-bolt
+  namespace: neo4j
+spec:
+  type: NodePort
+  selector:
+    app: my-neo4j
+    helm.neo4j.com/instance: my-neo4j-release
+  ports:
+    - name: tcp-bolt
+      nodePort: 31851       # Node port for external access
+      port: 7687            # Service port
+      protocol: TCP
+      targetPort: 7687      # Target port on the Pod

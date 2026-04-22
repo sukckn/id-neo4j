@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: nginx
+data:
+  "7687": "neo4j/neo4j-bolt:7687"

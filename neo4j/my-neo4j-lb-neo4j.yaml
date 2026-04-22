@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: my-neo4j-release
+    meta.helm.sh/release-namespace: neo4j
+  creationTimestamp: "2026-04-22T14:47:25Z"
+  labels:
+    app: my-neo4j
+    app.kubernetes.io/managed-by: Helm
+    helm.neo4j.com/neo4j.name: my-neo4j
+    helm.neo4j.com/service: neo4j
+  name: my-neo4j-lb-neo4j
+  namespace: neo4j
+  resourceVersion: "10653708"
+  uid: f56b266f-9f1f-4241-b5bb-802b5fd36c3b
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.98.200.198
+  clusterIPs:
+  - 10.98.200.198
+  externalTrafficPolicy: Local
+  healthCheckNodePort: 30297
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    nodePort: 31743
+    port: 7474
+    protocol: TCP
+    targetPort: 7474
+  - name: https
+    nodePort: 32423
+    port: 7473
+    protocol: TCP
+    targetPort: 7473
+  - name: tcp-bolt
+    nodePort: 31851
+    port: 7687
+    protocol: TCP
+    targetPort: 7687
+  selector:
+    app: my-neo4j
+    helm.neo4j.com/clustering: "false"
+    helm.neo4j.com/neo4j.loadbalancer: include
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}

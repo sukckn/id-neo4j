@@ -1,0 +1,25 @@
+neo4j:
+  edition: community
+  name: my-neo4j
+  env:
+    NEO4J_dbms_connector_http_advertised__address: ck02-sukckn.net.sas.com
+    NEO4J_dbms_connector_bolt_advertised__address: ck02-sukckn.net.sas.com:7687
+  config:
+  password: Orion123 # The password for the default "neo4j" user.
+  resources:
+    cpu: "0.5"
+    memory: "2Gi"
+
+volumes:
+  data:
+    mode: defaultStorageClass
+    defaultStorageClass:
+      requests:
+        storage: 2Gi
+
+ingress:
+  enabled: true
+  sslPassthrough: false
+  ingressClassName: "nginx"
+  annotations: { }
+  httpHostName: "ck02-sukckn.net.sas.com"
